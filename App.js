@@ -14,6 +14,7 @@ export default class App extends Component {
     this.state = { altura: 0, massa: 0, resultado: 0, resultadoText: "" };
     this.calcular = this.calcular.bind(this);
   }
+
   calcular() {
     let imc = this.state.massa / (this.state.altura * this.state.altura);
     let s = this.state;
@@ -41,7 +42,7 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={[styles.resultado, {fontSize:35}]}>Calcule Seu IMC</Text>
+        <Text style={styles.inicio}>Calcule Seu IMC</Text>
         <View style={styles.entradas}>
           <TextInput
             placeholder="Peso"
@@ -56,8 +57,9 @@ export default class App extends Component {
             keyboardType="numeric"
             style={styles.input}
             onChangeText={(altura) => {
-              this.setState({ altura });
+              this.setState({altura});
             }}
+            id="input-altura"
           ></TextInput>
         </View>
         <TouchableOpacity style={styles.button} onPress={this.calcular}>
@@ -67,6 +69,7 @@ export default class App extends Component {
         <Text style={[styles.resultado, { fontSize: 35 }]}>
           {this.state.resultadoText}
         </Text>
+        <Text style={styles.fim}>github.com/tetresbr</Text>
         <StatusBar style="auto" />
       </View>
     );
@@ -77,6 +80,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fsfcff",
+  },
+  inicio:{
+    backgroundColor: "#363636",
+    alignSelf: "center",
+    textAlign: "center",
+    color: "lightgray",
+    fontSize: 30,
+    padding: 60,
+    width: "100%",
   },
   entradas: {
     flexDirection: "row",
@@ -89,7 +101,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   button: {
-    backgroundColor: "#89ffa5",
+    backgroundColor: "#363636",
   },
   buttonText: {
     alignSelf: "center",
@@ -103,5 +115,17 @@ const styles = StyleSheet.create({
     color: "lightgray",
     fontSize: 60,
     padding: 15,
+  },
+  fim: {
+    position: "fixed",
+    bottom:0,
+    left:0,
+    backgroundColor: "#363636",
+    alignSelf: "right",
+    textAlign: "right",
+    color: "lightgray",
+    fontSize: 20,
+    padding: 20,
+    width: "100%",
   },
 });
